@@ -9,7 +9,7 @@ class Highlighter
 
     in_file.each_line do |line|
       patterns_hash.each_pair do |pattern, color|
-        line.gsub!(pattern, "<span class=\"color#{color_name(color)}\">\\0</span>")
+        line.gsub!(Regexp.new(pattern), "<span class=\"color#{color_name(color)}\">\\0</span>")
       end
       out_file.write(line)
     end

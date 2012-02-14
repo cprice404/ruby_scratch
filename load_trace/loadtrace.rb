@@ -123,7 +123,7 @@ module LoadTrace
 alias original_#{method_sym} #{method_sym}
 
 def #{method_sym}(*args)
-  LoadTrace.call_traced_method_block("#{context.to_s}",  :#{method_sym}, args, caller[1])
+  LoadTrace.call_traced_method_block("#{context.to_s}",  :#{method_sym}, args, caller[3])
   original_#{method_sym}(*args)
 end
 END
