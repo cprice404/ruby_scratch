@@ -20,39 +20,28 @@ module LoadTrace
 
   def self.record_load_if_interesting(load_path, origin)
     if (load_path =~ /^(?:(?:puppet)|\.|\/)/) then
-      #puts("OK, '#{load_path}' is interesting.")
-      #puts("('#{load_path}', '#{origin}', '#{@origin_stack}') (current depth #{@origin_stack.length})")
       if (@origin_stack.length == 0) then
-        #puts("This is our first item so we will push it onto the stack.")
         @origin_stack.push(load_path)
       else
         origin_match = origin.match(/^.*\/lib\/(.*)\.rb:\d+$/)
         if (origin_match) then
           origin_path = origin_match[1]
-          #puts("Origin match regex succeeded; '#{origin_path}'")
           if (! (@origin_stack.include?(origin_path))) then
-            #puts("This isn't on our current stack, must be a new one.'")
             @origin_stack.push(origin_path)
           elsif (@origin_stack[-1] == origin_path) then
-            #puts("This is the top of the stack so we are at the correct depth")
           else
-            #puts("We appear to have come back out of the stack a bit...")
             while (@origin_stack[-1] != origin_path) do
-              #puts("Removing #{@origin_stack[-1]} from the stack")
               @origin_stack.pop()
             end
           end
         end
 
-
-        #LoadTrace::T << [@origin_stack.length, :load, load_path, origin]
         LoadTrace.add_trace_event(:load, load_path, origin)
       end
     end
   end
 
   def self.add_trace_event(operation, object, origin)
-    #puts("ADDING TRACE EVENT: '#{operation}', '#{object}', '#{origin}'")
     LoadTrace::T << [@origin_stack.length, operation, object, origin]
   end
 
@@ -69,24 +58,18 @@ module LoadTrace
 
   @traced_methods = {}
   def self.trace_method(module_or_class_name, method_sym, &block)
-    #puts("TRACE_METHOD called; block: '#{block}'")
     @traced_methods[module_or_class_name] ||= {}
     @traced_methods[module_or_class_name][method_sym] = block
-    #puts("TRACED METHODS: '#{@traced_methods.inspect}'")
   end
 
 
   def self.call_traced_method_block(module_or_class_name, method_name, args, origin)
     extra_trace_val = ""
-    #puts("CALL TRACED METHOD BLOCK: '#{module_or_class_name}', '#{method_name}'")
-    #puts("     TRACED METHOD BLOCK1: '#{@traced_methods[module_or_class_name]}'")
-    #puts("     TRACED METHOD BLOCK2: '#{@traced_methods[module_or_class_name][method_name]}'")
     if (@traced_methods.has_key?(module_or_class_name) &&
         @traced_methods[module_or_class_name].has_key?(method_name) &&
         ! @traced_methods[module_or_class_name][method_name].nil?) then
       extra_trace_val = @traced_methods[module_or_class_name][method_name].call(args)
     end
-    #puts("EXTRA TRACE VAL: '#{extra_trace_val}'")
 
     return if extra_trace_val.nil?
 
@@ -101,24 +84,8 @@ module LoadTrace
 
   def self.handle_method_added(is_singleton, method_sym, context)
     return if @currently_defining_alias
-    #puts("METHOD ADDED: '#{args.inspect}', self: '#{self.inspect}'")
-    #puts("METHOD ADDED: '#{is_singleton},  #{method_sym}', context: '#{context.inspect}'")
     if (@traced_methods.has_key?(context.to_s) &&
         @traced_methods[context.to_s].has_key?(method_sym)) then
-      #puts("#{is_singleton ? "SINGLETON" : "INSTANCE"} METHOD ADDED: '#{method_sym}', self: '#{context.inspect}'")
-      #chained_method_def = nil;
-
-#      if @traced_methods[context.to_s][method_sym].nil? then
-#        chained_method_def == <<END
-#alias original_#{method_sym} #{method_sym}
-#
-#def #{method_sym}(*args)
-#  LoadTrace.add_trace_event(:method_call, "\#{self.inspect}.#{method_sym}(\#{args.inspect})", caller[1])
-#  #puts("CALLING TRACE METHOD!!! ('\#{self.inspect}', '#{method_sym}')")
-#  original_#{method_sym}(*args)
-#end
-#END
-#      else
         chained_method_def = <<END
 alias original_#{method_sym} #{method_sym}
 
@@ -127,13 +94,6 @@ def #{method_sym}(*args)
   original_#{method_sym}(*args)
 end
 END
-      #end
-
-      #puts("HERE IS THE METHOD DEFINITION:")
-      #puts()
-      #puts(chained_method_def)
-      #puts()
-      #puts()
 
       target = eval(context.to_s);
       if is_singleton then
@@ -164,20 +124,6 @@ def load(*args)
   original_load(*args)                  # Invoke the original method
 end
 
-#
-#Module Puppet
-#  class Application
-
-#module Foo
-#  @methods_i_care_about = { "Puppet::Application" => ["run_mode"]}
-#  def self.methods_i_care_about()
-#    @methods_i_care_about
-#  end
-#end
-
-#def Object.inherited(*args)                            q
-#  puts("CLASS INHERITED: '#{args.inspect}', self: '#{self.inspect}'")
-#end
 
 def Object.method_added(method_sym)
   LoadTrace.handle_method_added(false, method_sym, self)
