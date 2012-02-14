@@ -115,12 +115,10 @@ alias original_load load
 # Alias chaining step 2: define new versions of the methods 
 def require(file)
   LoadTrace::record_load_if_interesting(file, caller[0])
-  #LoadTrace::T << [file,caller[0]]     # Remember what was loaded where
   original_require(file)                # Invoke the original method
 end
 def load(*args)
   LoadTrace::record_load_if_interesting(args[0], caller[0])
-  #LoadTrace::T << [args[0],caller[0]]  # Remember what was loaded where
   original_load(*args)                  # Invoke the original method
 end
 
