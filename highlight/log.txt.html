@@ -1,0 +1,1176 @@
+<style type="text/css">
+	.color00FF00 { background-color: #00FF00 }
+	.colorFF0000 { background-color: #FF0000 }
+	.color0000FF { background-color: #0000FF }
+</style>
+<pre>
+commit d2b4c858d52dd69eccd2f1f913cd096f53bd32bc
+Merge: 0e6d9eb b010511
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Mon Dec 19 15:47:18 2011 -0500
+
+    Merge branch 'pacman-provider-updates'
+    
+    * pacman-provider-updates:
+      Use actual package instance instead of stub
+      Sync database before installing from source
+      Use a sequence instead of a state machine in testing packman provider
+      Make the URL part of pacman_spec DRY
+      Accept URL as pacman package source
+      Use pacman -U to install from source
+      Be specific when stubbing @resource[:name]
+
+commit b010511242ad59b7708c2e1af6c98f430f299c97
+Author: Whyme.Lyu <5longluna@gmail.com>
+Date:   Sun Dec 18 10:28:30 2011 +0800
+
+    Use actual package instance instead of stub
+
+commit 6d5c0f91dd28a5dde81dc859138c2f30b63b4a54
+Author: Whyme.Lyu <5longluna@gmail.com>
+Date:   Mon Sep 12 20:31:12 2011 +0800
+
+    Sync database before installing from source
+
+commit 38b64cff90456dfbe54da10146045001595d1c27
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Mon Dec 19 14:25:09 2011 -0500
+
+    Use a sequence instead of a state machine in testing packman provider
+    
+    Sate machines are handy for testing complex behavior, however we are
+    concerned with whether or not a particular set of methods are called
+    in a specific order.  Since we are concerned primarily with the
+    ordering of the method calls, use a sequence instead.
+    
+    Signed-off-by: Whyme.Lyu <5longluna@gmail.com>
+    Signed-off-by: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+
+commit 0e6d9eb661d5ef1b77d76c60b348c8cdaed4c79c
+Merge: 1826e05 2917d24
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Mon Dec 19 11:49:27 2011 -0800
+
+    Merge branch 'tickets/master/10950'
+    
+    * tickets/master/10950:
+      (#10950) Make config print default to printing all options
+
+commit 2917d2411672b6720df8124210fcc7fb6c820c7f
+Author: Dean Wilson <dean.wilson@gmail.com>
+Date:   Tue Dec 13 18:22:34 2011 +0000
+
+    (#10950) Make config print default to printing all options
+    
+    When given no argument make 'puppet config print' print full configuration.
+    Before this it returned nothing.
+    
+    Signed-off-by: Patrick Carlisle <patrick@puppetlabs.com>
+
+commit ebd9a7fc101380d2719e4aa0d10d0283e6c447ad
+Author: Whyme.Lyu <5longluna@gmail.com>
+Date:   Mon Sep 12 19:01:24 2011 +0800
+
+    Make the URL part of pacman_spec DRY
+
+commit 5a3b1d9464ca73ade0032ed41da82a9137714b58
+Author: Whyme.Lyu <5longluna@gmail.com>
+Date:   Mon Sep 12 18:50:33 2011 +0800
+
+    Accept URL as pacman package source
+
+commit 53dd20f1536c3084d9426b8409f6364de1c353f0
+Author: Whyme.Lyu <5longluna@gmail.com>
+Date:   Mon Sep 12 18:09:35 2011 +0800
+
+    Use pacman -U to install from source
+
+commit 0740e9507dd0a54734b29ca8d16641aea44b94e5
+Author: Whyme.Lyu <5longluna@gmail.com>
+Date:   Mon Sep 12 18:01:12 2011 +0800
+
+    Be specific when stubbing @resource[:name]
+
+commit 1826e0508d11d1a9f8dd6ab652eec99b80d63241
+Merge: 9d08fed 42783d5
+Author: <span class="color0000FF">Daniel Pittman</span> <daniel@rimspace.net>
+Date:   Mon Dec 19 09:57:09 2011 -0800
+
+    Merge pull request #285 from jhelwig/disable-srv-lookup-by-default-in-tests
+    
+    Disable SRV lookups of hosts by default when testing
+
+commit 42783d55602bf9d616f4f25927dc86d10993885f
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Mon Dec 19 12:47:54 2011 -0500
+
+    Disable SRV lookups of hosts by default when testing
+    
+    The old behavior of leaving SRV lookups turned on by default in tests
+    was causing problems if the machine running the tests reported itself
+    as having a domain name that has SRV records setup for Puppet.  This
+    would cause extra calls to Puppet.warning due to the failed connection
+    attempts, which could cause a problem if the test was looking
+    for specific warnings (which
+    spec/unit/indirector/facts/inventory_service_spec.rb does).
+
+commit 9d08fed3602aaa53015f2acbdb87c9c546987bb1
+Merge: 9b7c73a 45f0855
+Author: <span class="color00FF00">Nick Lewis</span> <nick@puppetlabs.com>
+Date:   Fri Dec 16 15:49:26 2011 -0800
+
+    Merge branch '2.7.x'
+
+commit 45f0855bd6be36a66acd0a28a8ed83e2d63af239
+Merge: 788d936 84fdf6f
+Author: lifton <lifton@puppetlabs.com>
+Date:   Fri Dec 16 15:25:20 2011 -0800
+
+    Merge pull request #284 from MaxMartin/ticket/2.7.x/10109-composite-namevars
+    
+    Ticket/2.7.x/10109 composite namevars
+
+commit 788d9368cb33a14a9b27a61da2af57dbe38b1ac2
+Merge: e404391 8ec6086
+Author: Jeff McCune <jeff@puppetlabs.com>
+Date:   Fri Dec 16 12:24:05 2011 -0800
+
+    Merge pull request #282 from jhelwig/last-run-summary-permissions-on-windows
+    
+    Last run summary permissions on windows
+
+commit 8ec608644d8b39816503acab4b1bbfc21dfea306
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Fri Dec 16 14:25:32 2011 -0500
+
+    Account for Windows file mode translation for lastrunfile
+    
+    Windows file modes do not directly translate to POSIX file modes, so
+    we can't use the same file mode on Windows to check that setting the
+    mode worked correctly.
+
+commit e40439196af14f90d8a321999b782f24a3fa59f6
+Merge: 4cc1142 b28cac8
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Fri Dec 16 13:50:17 2011 -0500
+
+    Merge branch 'tickets/2.7.x/7106-last-run-summary-permissions' into 2.7.x
+    
+    * tickets/2.7.x/7106-last-run-summary-permissions:
+      (#7106) Obey specified owner, group, and permissions for last run summary file
+
+commit b28cac8bea0eef58791c9e7e0749e5762f6e59d1
+Author: Brice Figureau <brice-puppet@daysofwonder.com>
+Date:   Sat Nov 12 17:38:46 2011 +0100
+
+    (#7106) Obey specified owner, group, and permissions for last run summary file
+    
+    When writing the last run summary (puppet settings lastrunfile), we
+    now enforce any specified mode.  The default permissions have also
+    been changed to 0644.  This can be changed in puppet.conf:
+    
+      [agent]
+      ...
+      lastrunfile = /tmp/lastrun.yml { mode=0664 }
+      ...
+    
+    While the owner and group can be specified, the only choices that work
+    at this time are root, and the service user/group.
+    
+    Signed-off-by: Brice Figureau <brice-puppet@daysofwonder.com>
+    Signed-off-by: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+
+commit 4cc1142da35ecc3b052c67e550bba5d39c2b78f4
+Merge: a08370d d4d3cb3
+Author: Jeff McCune <jeff@puppetlabs.com>
+Date:   Fri Dec 16 09:20:50 2011 -0800
+
+    Merge pull request #280 from joshcooper/ticket/2.7.x/10586-file-sourcing-from-master
+    
+    (#10586) Don't copy owner and group on Windows when sourcing from master
+
+commit a08370db73c2a9f8de4531d22565f94a3910ecfd
+Merge: 9338445 b8c5ee2
+Author: Jeff McCune <jeff@puppetlabs.com>
+Date:   Thu Dec 15 17:36:43 2011 -0800
+
+    Merge pull request #281 from joshcooper/ticket/2.7.x/11408-fact-plugin-sync
+    
+    (#11408) Fix fact and plugin sync on Windows
+
+commit b8c5ee2172e53fd2a9398787f00752baadb02823
+Author: Josh Cooper <josh@puppetlabs.com>
+Date:   Thu Dec 15 15:11:22 2011 -0800
+
+    (#11408) Fix fact and plugin sync on Windows
+    
+    Previously, fact and pluginsync were broken on Windows, because it was
+    defaulting the owner and group to Process.uid/gid, and then failing to
+    translate them into Windows SIDs.
+    
+    This commit changes the default file owner to the current user name,
+    and the default file group to Nobody, which is the group that Windows
+    typically applies to newly created files.
+
+commit d4d3cb363eaeb29087498ae249dfe21d28d18201
+Author: Josh Cooper <josh@puppetlabs.com>
+Date:   Thu Dec 15 14:20:00 2011 -0800
+
+    (#10586) Don't copy owner and group when sourcing files from master
+    
+    Previously, puppet on Windows was not able to source files from the
+    master, because it was attempting to translate the uid/gid from
+    the Unix master into a Windows account, and obviously failing.
+    
+    This commit skips the owner and group properties when copying them
+    from non-local sources, i.e. sources whose URIs have a 'puppet'
+    scheme.
+    
+    If the source comes from a local source, then puppet behaves the same
+    as it did previously, it copies the owner and group if the source
+    volume supports Windows ACLs, e.g. C:/, samba mapped drives, or uses
+    default values if the volume does not, e.g. VMware shared drives.
+
+commit 933844567fbe4078cb76f2c089ced1cb6c4170b7
+Merge: 2717c55 1519d30
+Author: <span class="color0000FF">Daniel Pittman</span> <daniel@rimspace.net>
+Date:   Thu Dec 15 16:24:53 2011 -0800
+
+    Merge pull request #279 from pcarlisle/tickets/2.7.x/7428-cert-ruby-1.9.2-issues
+    
+    (#7428) Fix option parsing for ruby 1.9 in cert application
+
+commit 1519d30b1f1e9058ec4be090afae9c03e2f4fbc5
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Thu Dec 15 15:36:54 2011 -0800
+
+    (#7428) Fix option parsing for ruby 1.9 in cert application
+    
+    In Ruby 1.9 block arity is strictly enforced. This changes options created
+    using blocks to all take one argument. The OptionParser library handles this
+    correctly even if an option doesn't take arguments (giving an argument of true
+    if the block takes an argument).
+
+commit 2717c55076ea42cd38ea8b549ee7add31d6bb722
+Merge: 213cecc ff396bf
+Author: <span class="color0000FF">Daniel Pittman</span> <daniel@rimspace.net>
+Date:   Thu Dec 15 13:20:43 2011 -0800
+
+    Merge pull request #278 from nfagerlund/ticket/2.7.x/11404-type-reference-indentation
+    
+    Ticket/2.7.x/11404 type reference indentation
+
+commit 213cecc80a2ffed3a6a19005a028aeebe2f74ccf
+Author: <span class="color0000FF">Daniel Pittman</span> <daniel@puppetlabs.com>
+Date:   Thu Dec 15 11:53:08 2011 -0800
+
+    Revert "(#11423) Clearer error message about duplicate imported resources."
+    
+    This reverts commit e8e1f577ba091203b05b4a8279aadd8c55a65fe7.
+    
+    This was committed directly rather than as a pull request because I misread
+    the GitHub "online code editor" button, and it didn't behave the way I
+    expected.
+    
+    I intended a pull request, rather than a commit, and will reissue this the
+    right way.  Sorry. :(
+
+commit e8e1f577ba091203b05b4a8279aadd8c55a65fe7
+Author: <span class="color0000FF">Daniel Pittman</span> <daniel@rimspace.net>
+Date:   Thu Dec 15 11:49:10 2011 -0800
+
+    (#11423) Clearer error message about duplicate imported resources.
+    
+    When multiple nodes export a resource with a duplicate type and title, and you import both, the error message misleadingly tells you that this was a *local* duplication.
+    
+    This improves the error message to cover all the bases, which is suboptimal - it should tell you where the duplicate comes from - but at least doesn't lead to a wild goose hunt for the *local* duplicate that doesn't exist.
+
+commit ff396bfe35aeee9bd9194688a38e85f045cf95db
+Author: nfagerlund <nick.fagerlund@gmail.com>
+Date:   Wed Dec 14 17:42:41 2011 -0800
+
+    Maint: Fix redhatfedorasusecentosslesoelovm in type reference
+    
+    Many providers are the default for an array of operatingsystem values.
+    Although the dochook(:defaults) method was handling multiple defaults already,
+    it wasn't handling multiple values for a single default very well, so we would
+    say a provider was default for operatingsystem == redhatfedorasusecentosslesoelovm.
+    
+    This commit refactors that to render arrays of values for a single default as
+    a comma-separated list, without breaking the way we handle string values for a
+    single default.
+
+commit 6682fe7f11c24b5c576eca42fe46ab5c1bf1bab6
+Author: nfagerlund <nick.fagerlund@gmail.com>
+Date:   Wed Dec 14 17:37:59 2011 -0800
+
+    Maint: Padding should be added when dochook strings are consumed, not hardcoded into them
+    
+    Previously, the return values of the dochook_ methods in provider.rb had a
+    leading two-space padding hardcoded into them. This was mostly fine, but had
+    the potential to interact badly with semantic Markdown indentation. This
+    commit moves the padding into the method where we compose those strings into
+    their final position, which gets us some better separation of content and
+    formatting.
+    
+    This commit also changes our display of extra info by giving it its own
+    paragraph. Previous behavior was undefined and depended on whether the doc string
+    ended with more than one newline; it usually appended the extra info to the
+    final paragraph of the documentation.
+
+commit b569c7e9720e0dfbe7519632dad594afdf8ae9f2
+Author: nfagerlund <nick.fagerlund@gmail.com>
+Date:   Wed Dec 14 17:29:16 2011 -0800
+
+    (#11404) Fix broken and unreliable indentation in provider lists in type reference
+    
+    Previously, portions of a provider's documentation string could be wildly
+    outdented relative to their surroundings, due to the interaction of some
+    inaccurate assumptions; see http://projects.puppetlabs.com/issues/11404 for
+    more details.
+    
+    This commit fixes these formatting glitches by normalizing the indentation of
+    the various fragments we assemble into the provider parameter's doc string. We
+    normalize the parameter's @doc explicitly with scrub(), and then we render the
+    list of providers as a definition list, which implicitly normalizes indentation.
+
+commit c15d997379a8b90793b90857301a5796bbadec3e
+Author: nfagerlund <nick.fagerlund@gmail.com>
+Date:   Wed Dec 14 16:22:07 2011 -0800
+
+    Maint: Make indentation for markdown definition lists more readable and reliable
+    
+    Previously, we indented subsequent lines of definition lists with a four-space
+    hanging indent. This ensured that multi-paragraph DD elements would work, but
+    was unsightly. This commit changes the hanging indent for definitions to 2
+    spaces, which also works but is much more legible before being processed into HTML.
+    
+    This commit also adds sanitization (via the scrub method) for definition text.
+    Since scrub() is idempotent, and since the consequences of text with
+    unreliable indentation making it into a DD element are so annoying, it makes
+    sense to hedge our bets when creating the element.
+    
+    Test update included.
+
+commit e80ca2d8e7812b2d78a8e6494c6c7b1b7e1d0835
+Author: nfagerlund <nick.fagerlund@gmail.com>
+Date:   Wed Dec 14 16:18:45 2011 -0800
+
+    (#11404) Move markdown_header and markdown_definitionlist to Puppet::Util::Docs
+    
+    The markdown_header and markdown_definitionlist methods are needed in places
+    other than the Puppet::Util::Reference class. In particular, they may become
+    necessary when assembling fragments of documentation from other fragments,
+    much as we need to do for the :provider parameter.
+    
+    This commit puts them in the Puppet::Util::Docs module, which leaves them
+    available when generating the references but also exposes them in many other
+    places.
+
+commit 7da15bfbcfd654a2e5104e838446ce1fabf05e42
+Merge: 04b027b 471fb58
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Wed Dec 14 14:41:23 2011 -0800
+
+    Merge branch 'tickets/2.7.x/11333-fix-ensurable' into 2.7.x
+    
+    * tickets/2.7.x/11333-fix-ensurable:
+      (#11333) Make Puppet::Type.ensurable? false when exists? is undefined
+
+commit 471fb589a42cccfb2afa66abd60a9139ab8ec3c1
+Author: Ilya Sher <ilya.sher@coding-knight.com>
+Date:   Mon Dec 12 07:34:28 2011 +0200
+
+    (#11333) Make Puppet::Type.ensurable? false when exists? is undefined
+    
+    Puppet::Type.ensurable? incorrectly returned true even when
+    public_method_defined?(:exists?) was false because the check never
+    actually happened. This make sure all the necessary methods are checked
+    and adds tests.
+    
+    Signed-off-by: Patrick Carlisle <patrick@puppetlabs.com>
+
+commit 04b027b8d4a4e13b4b9f2ee7cd4c01715ffd68e8
+Merge: 40313fa 31cef94
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Wed Dec 14 14:12:44 2011 -0800
+
+    Merge branch 'tickets/2.7.x/10676' into 2.7.x
+    
+    * tickets/2.7.x/10676:
+      Add config and puppet version to the last run summary file
+      (#10676) Include all resource statuses in reports regardless of count
+
+commit 31cef941a7d3048b6f5b22cc607b16715599a2cd
+Author: Brice Figureau <brice-puppet@daysofwonder.com>
+Date:   Sat Nov 12 17:17:05 2011 +0100
+
+    Add config and puppet version to the last run summary file
+    
+    I figured that it would be interesting to have those information
+    in the last run summary.
+    
+    Signed-off-by: Brice Figureau <brice-puppet@daysofwonder.com>
+
+commit f71af6f690a4630243d4c31ad568669cc624f7fb
+Author: Brice Figureau <brice-puppet@daysofwonder.com>
+Date:   Sat Nov 12 17:16:21 2011 +0100
+
+    (#10676) Include all resource statuses in reports regardless of count
+    
+    Before, we would only include resource status states, and
+    failure/success counts if there were resources that were in these
+    various states.  We now initialize the hashes used to gather the
+    counts of these metrics so that they will include all known states,
+    even if the count of resources that were in that state is zero.
+    
+    Signed-off-by: Brice Figureau <brice-puppet@daysofwonder.com>
+    Signed-off-by: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+
+commit 9b7c73a74d5d03ea157e1e4d5ae7a6eba99fd24e
+Merge: 464a279 a584e4f
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Wed Dec 14 13:40:51 2011 -0800
+
+    Merge branch 'add-pkgin-provider'
+    
+    * add-pkgin-provider:
+      Add pkgin package provider
+
+commit a584e4f4c27937140a5602f314800d33189aabcf
+Author: Paul Mucur <mudge@mudge.name>
+Date:   Tue Nov 8 22:44:51 2011 +0000
+
+    Add pkgin package provider
+    
+    pkgin is a binary package manager for pkgsrc as used by Joyent on
+    their SmartMachines. This is a package provider for pkgin with the
+    standard installable and uninstallable features.
+
+commit 40313fa143ed97d9b4f83f150ba2d5c8811d40e3
+Merge: 2eff2fa 2be44d4
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Tue Dec 13 12:19:36 2011 -0800
+
+    Merge remote-tracking branch 'jhelwig/tickets/2.7.x/8062-yum-epoch' into 2.7.x
+    
+    * jhelwig/tickets/2.7.x/8062-yum-epoch:
+      (#8062) Consider package epoch version when comparing yum package versions
+
+commit 2eff2fab91aa060aa53bbd202d88fb6ffd1871eb
+Merge: 8ae917a 4d9e0c0
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Tue Dec 13 10:48:53 2011 -0800
+
+    Merge branch 'apache2-conf-fix' of git://github.com/eklein/puppet into 2.7.x
+    
+    * 'apache2-conf-fix' of git://github.com/eklein/puppet:
+      Added missing RequestHeader entries to ext/rack/files/apache2.conf
+
+commit 2be44d40dbccbb54d5ac730cf852d6e067b8c523
+Author: Jude Nagurney <jude@pwan.org>
+Date:   Thu Jun 23 10:20:28 2011 -0700
+
+    (#8062) Consider package epoch version when comparing yum package versions
+    
+    By including the epoch version in the version returned as the "latest"
+    available, we can now properly consider package updates where only the
+    epoch version has changed.
+    
+    Signed-off-by: Jude Nagurney <jude@pwan.org>
+    Signed-off-by: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+
+commit 8ae917aaeabc47fe950e0d580adde2d28f373de7
+Merge: b9dcf4b e9a5116
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Mon Dec 12 16:46:52 2011 -0800
+
+    Merge branch 'tickets/2.7.x/6412' into 2.7.x
+    
+    * tickets/2.7.x/6412:
+      (#6412) Return :undef when accessing non-existing hash/array elements
+
+commit e9a5116f945adae5d3572d405c50f5450bb2b76d
+Author: Brice Figureau <brice-puppet@daysofwonder.com>
+Date:   Sat Nov 12 16:08:36 2011 +0100
+
+    (#6412) Return :undef when accessing non-existing hash/array elements
+    
+    The truethiness test done in P::P::Scope.true? doesn't handle nil
+    values, because it is not valid as result of a puppet expression.
+    Unfortunately ruby hash['invalid'] or array[inexistant_index] returns
+    nil which then was considered as true in an if expression.
+    This patch makes sure :undef is returned in those cases.
+    
+    Signed-off-by: Brice Figureau <brice-puppet@daysofwonder.com>
+
+commit b9dcf4b33aeb6b0b8bb3948138d657039c88e382
+Merge: f4bf4f4 65086c4
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Mon Dec 12 15:13:08 2011 -0800
+
+    Merge remote-tracking branch 'stschulte/ticket/2.7.x/9544' into 2.7.x
+    
+    * stschulte/ticket/2.7.x/9544:
+      (#9544) Stub command in package spec that needs root priviledges
+
+commit f4bf4f46f0215ac54528687e04a32d6f64de2b3f
+Merge: e465598 cbd78da
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Mon Dec 12 14:37:38 2011 -0800
+
+    Merge branch '4865-notify-start-of-evaluation' into 2.7.x
+    
+    * 4865-notify-start-of-evaluation:
+      (#4865) Log when we start evaluating resources at the info level
+
+commit cbd78da1b8e1fa7d6d8f965abd701014b0c147b9
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Mon Dec 12 14:34:12 2011 -0800
+
+    (#4865) Log when we start evaluating resources at the info level
+    
+    Since we log the final time at info it makes sense to log the start at info as
+    well.
+
+commit e465598ab1b7dc8481e7fa461d0c5d38fc2cdfd5
+Merge: 56fbe01 a6996ba
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Mon Dec 12 13:26:29 2011 -0800
+
+    Merge remote-tracking branch 'daniel-pittman/feature/2.7.x/4865-notify-start-of-evaluation-not-just-end' into 2.7.x
+    
+    * daniel-pittman/feature/2.7.x/4865-notify-start-of-evaluation-not-just-end:
+      (#4865) Debug logging when we start evaluating resources.
+
+commit 56fbe018bb7e317c8b5b19f69e95f4ee6acde2b9
+Merge: bfcb508 e8f1407
+Author: <span class="color0000FF">Daniel Pittman</span> <daniel@rimspace.net>
+Date:   Mon Dec 12 13:05:18 2011 -0800
+
+    Merge pull request #267 from mmrobins/maint/2.7.x/add_tap
+    
+    Maint/2.7.x/add tap
+    
+    Thanks, Matt - awesome addition.
+
+commit e8f140788c3b5d85e18d218b87e623b35e5aa91d
+Author: Matt Robinson <matt@puppetlabs.com>
+Date:   Mon Dec 12 11:12:36 2011 -0800
+
+    maint: Add tap to fix Ruby 1.8.5 failures
+    
+    The module tool used to rely on facets to get tap in Ruby 1.8.5, but it
+    lost that behavior when ported over.  This monkey patches Kernel to have
+    tap in case it doesn't already.
+
+commit bfcb5084d85238ec120a921b4ecd8a90a59bc94a
+Merge: 0be9f5c ddde61e
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Mon Dec 12 11:21:00 2011 -0800
+
+    Merge branch '10321-rangearray' into 2.7.x
+    
+    * 10321-rangearray:
+      (#10321) Fix array support in schedule's range parameter
+
+commit ddde61ec3f02e09ef84893809b1e1ed09196bf93
+Author: Sean Millichamp <sean@bruenor.org>
+Date:   Thu Oct 27 10:53:27 2011 -0400
+
+    (#10321) Fix array support in schedule's range parameter
+    
+    Change the schedule type's range parameter to properly evaluate
+    all elements of a supplied array for validity instead of only
+    checking the first member of the array. Add documentation to
+    clarify that range does accept an array.
+    
+    Fix the associated tests to use must instead of should (Puppet::Type#should
+    shadows the rspec should).
+    
+    Signed-off-by: Patrick Carlisle <patrick@puppetlabs.com>
+
+commit 0be9f5c9e9afea23fddbcd556609bdc38d52ce1c
+Merge: 0022f47 87f6f05
+Author: Matthaus Litteken <matthaus@puppetlabs.com>
+Date:   Fri Dec 9 18:49:11 2011 -0800
+
+    Merge branch '2.7rc' into 2.7.x
+
+commit 87f6f0546f25faf4fa3d370357c4e5bf70d49fde
+Author: Matthaus Litteken <matthaus@puppetlabs.com>
+Date:   Fri Dec 9 18:42:42 2011 -0800
+
+    Update CHANGELOG for 2.7.9 release
+
+commit 234afdf23ad94e66797bd9d4354139370f3f8548
+Merge: 3265b2c da11dc7
+Author: <span class="color00FF00">Nick Lewis</span> <nick@puppetlabs.com>
+Date:   Fri Dec 9 15:54:54 2011 -0800
+
+    Merge branch 'fix-1.8.5-incompatibilities' into 2.7rc
+
+commit da11dc71b0fc5db4ae2df2c6d5836b0a48586bf4
+Author: <span class="color00FF00">Nick Lewis</span> <nick@puppetlabs.com>
+Date:   Fri Dec 9 15:26:08 2011 -0800
+
+    Fix Ruby 1.8.5-incompatible code in FileBucket::Dipper spec
+    
+    The Digest::MD5.file method doesn't exist in 1.8.5, so we need to read
+    the file and digest its contents ourselves.
+    
+    Reviewed-By: Josh Cooper <josh@puppetlabs.com>
+
+commit 737c2f66476b2379f2546150856ea1cd7fdde08a
+Author: <span class="color00FF00">Nick Lewis</span> <nick@puppetlabs.com>
+Date:   Fri Dec 9 15:22:20 2011 -0800
+
+    Fix Ruby 1.8.5-incompatible code in Transaction#eval_generate
+    
+    This was previously creating a Hash from an array of pairs.
+    Unfortunately, Ruby 1.8.5 only supports an argument list of pairs rather
+    than an array, so this code didn't work with that version.
+    
+    Reviewed-By: Josh Cooper <josh@puppetlabs.com>
+
+commit 042925dfca3bcd19b3dd349629cd545c56fe31df
+Author: <span class="color00FF00">Nick Lewis</span> <nick@puppetlabs.com>
+Date:   Fri Dec 9 15:24:36 2011 -0800
+
+    Fix Ruby 1.8.5-incompatible code in spec setup
+    
+    The Range#step method in Ruby 1.8.5 expects to be passed a block, to
+    which it will yield each stepped element. In 1.8.7, it will simply
+    return an Enumerator (which we then enumerate) if no block is provided,
+    but in 1.8.5, it will try to yield anyway and fail because there
+    is no block.
+    
+    Reviewed-By: Josh Cooper <josh@puppetlabs.com>
+
+commit 464a279c7425643188024ba7f98392b9057d6e35
+Merge: 6036e5b 7145531
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Fri Dec 9 10:36:03 2011 -0800
+
+    Merge remote-tracking branch 'nicklewis/master'
+    
+    * nicklewis/master:
+      Fix failing acceptance test in resource/file/source_attribute.rb
+
+commit 71455315a7798d631e21cd905f797327dbed9e1c
+Author: <span class="color00FF00">Nick Lewis</span> <nick@puppetlabs.com>
+Date:   Fri Dec 9 10:28:34 2011 -0800
+
+    Fix failing acceptance test in resource/file/source_attribute.rb
+    
+    This test was failing in some environments because the cert used by the
+    master didn't explicitly set dns alt names, so it was possible it
+    wouldn't have the name that the agent was trying to use to connect to
+    it.
+
+commit 0022f4712748907f9cbac8ed6e0082b41014628a
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Thu Dec 8 17:06:20 2011 -0800
+
+    Revert "Build a Rake task for building Apple Packages"
+    
+    This reverts commit 8cca3770ee0868201c81e15611753c224f902305.
+    
+    This new rake task was always trying to gather information needed only
+    when generating the package for OS X, which was causing build failures
+    in the CI system.
+
+commit 4af4e79c3b2b86566ada589112f53515a47676f7
+Merge: 2ae312f 3265b2c
+Author: Matthaus Litteken <matthaus@puppetlabs.com>
+Date:   Thu Dec 8 15:46:15 2011 -0800
+
+    Merge branch '2.7rc' into 2.7.x
+
+commit 2ae312f09bbb64a439b24afcf0b2e952026ce038
+Merge: 8cca377 8d83c4e
+Author: Jeff McCune <jeff@puppetlabs.com>
+Date:   Thu Dec 8 15:39:56 2011 -0800
+
+    Merge pull request #261 from jeffmccune/minor/2.7.x/11246_fix_grammar_feedback_from_brice
+    
+    Minor/2.7.x/11246 fix grammar feedback from brice
+
+commit 3265b2c2c2805af100fc1f0c8d5eb27afd4c76b0
+Author: Matthaus Litteken <matthaus@puppetlabs.com>
+Date:   Thu Dec 8 15:37:54 2011 -0800
+
+    Updating CHANGELOG for 2.7.8 release
+
+commit 8d83c4e218be92a7253c2a8021d2cf1769cde7ca
+Author: Jeff McCune <jeff@puppetlabs.com>
+Date:   Thu Dec 8 15:37:24 2011 -0800
+
+    (maint) Fix grammar mistakes in README_DEVELOPER
+    
+    This is a documentation only patch that fixes some minor mistakes
+    @masterzen kindly pointed out in pull request #250.
+
+commit 8cca3770ee0868201c81e15611753c224f902305
+Author: Gary Larizza <gary@puppetlabs.com>
+Date:   Mon Dec 5 14:27:23 2011 -0800
+
+    Build a Rake task for building Apple Packages
+    
+    The goal is to have our release managers build all Puppet packages
+    within Rake, and so this commit adds a rake task (apple_package) that
+    will build a DMG-encapsulated package for OS X and put it into the
+    pkg/apple directory off of the Puppet Root.
+    
+    To accomplish this goal, a folder structure is created in
+    /tmp/puppet/puppet-#{version} that mirrors the structure needed for
+    Apple's Packagemaker CLI tool to build a package for OS X. Next, the
+    necessary files are copied from the Puppet source into the structure in
+    /tmp/puppet/puppet-#{version} and then packagemaker is run
+    (targeting that folder structure) to build an initial package. Hdiutil
+    then encapsulates that package into a DMG, and the file is finally
+    copied into the pkg/apple directory.
+    
+    Namespace package:apple rake task
+    
+    To align with the current rake workflow, the action to build an Apple
+    package should be namespaced under the package action. This commit does
+    that. Checks have also been added to ensure that the package:apple task
+    is run as root (which is necessary for OS X) and that the packagemaker
+    binary is installed (as its necessary for the task). If neither is true,
+    the task will fail sanely (as opposed to a stack trace).
+    
+    Use git describe to get Puppet version
+    
+    Using `git describe` over Puppet::PUPPETVERSION to get the current
+    Puppet version allows us to pull in the 'RCx' tag which can be used to
+    build the package. `git describe` is split on the hyphen ( - ) to remove
+    all the additional cruft at the end. Finally, the package minor version
+    splits on 'rc' since prototype.plist can only contain integers and not
+    string data.
+    
+    Install into /usr/lib/ruby/site_ruby
+    
+    In order to support 10.4 (which will be dropped in 2.8.x), we must
+    install puppet into /usr/lib/ruby/site_ruby/1.8 as opposed to
+    /Library/Ruby/Site/1.8. The prototype.plist file we bundle with the
+    package we create sets the IFPkgFlagFollowLinks key to true, so as long
+    as the symlink exists the package we build will respect it.
+    
+    There IS a bug in OS X
+    (http://openradar.appspot.com/9202152) where the symlink in
+    /usr/lib/ruby/site_ruby is incorrect PRIOR to the first time the OS is
+    booted, but the symlink gets fixed at first boot. Users who build a
+    previously-unbooted-pristine-image of OS X and who also intend to
+    install Puppet on that image BEFORE it is booted may need to modify
+    their package to target /Library/Ruby/Site/1.8, however we cannot do
+    this at this time as OS X 10.4 DOES NOT have a /Library/Ruby/Site/1.8
+    folder.
+
+commit 6036e5bc057544643b8760587bc1f2e88cdb6c08
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Thu Dec 8 14:31:35 2011 -0800
+
+    Fix tests for MacPorts provider when MacPorts is not installed
+
+commit a52eb6ecaa8dca06639c60f05f3204eefdb4d482
+Merge: 10c1c16 3d16094
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Thu Dec 8 14:09:20 2011 -0800
+
+    Merge branch 'fix-macports'
+    
+    * fix-macports:
+      (#8374) Make MacPorts provider ignore warnings from port command
+      (#8319) Fix macports provider when ensure is latest but the package is not present
+      (#8314) Ignore variants in installed macports packages
+      (#6830) Fix macports provider under ruby 1.9.2
+
+commit 3d1609489265ae466baa3a062c3219f8d9bd45f5
+Author: Matthias Pigulla <mp@webfactory.de>
+Date:   Thu Aug 25 00:06:43 2011 +0200
+
+    (#8374) Make MacPorts provider ignore warnings from port command
+    
+    Call port using combine => false to ignore errors.
+    
+    Signed-off-by: Patrick Carlisle <patrick@puppetlabs.com>
+
+commit c730aaeadbeec6aed78760402b60a4c35e97c151
+Author: Matthias Pigulla <mp@webfactory.de>
+Date:   Thu Aug 25 00:04:24 2011 +0200
+
+    (#8319) Fix macports provider when ensure is latest but the package is not present
+    
+    The query method is expected to return an array but could return nil if a
+    package was not present. Make sure it just returns an empty array in that
+    case.
+    
+    Signed-off-by: Patrick Carlisle <patrick@puppetlabs.com>
+
+commit 40b4a41fe287334b0dad55a496a07c442d34b50b
+Author: Matthias Pigulla <mp@webfactory.de>
+Date:   Thu Aug 25 00:02:38 2011 +0200
+
+    (#8314) Ignore variants in installed macports packages
+    
+    We don't support specifying variants through puppet, so we want to ignore them
+    when listing local packages so that versions compare correctly.
+    
+    Signed-off-by: Patrick Carlisle <patrick@puppetlabs.com>
+
+commit 72edd9d75c9c8249606524b772ef93629907e8de
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Thu Dec 8 11:18:19 2011 -0800
+
+    (#6830) Fix macports provider under ruby 1.9.2
+    
+    Change a String#each to String#each_line since each was removed in 1.9.
+
+commit 4275fd498528254f48ea4e0246f465cc9c6eb436
+Author: nfagerlund <nick.fagerlund@gmail.com>
+Date:   Thu Dec 8 11:28:38 2011 -0800
+
+    (#11291) Update description of show_diff setting to match behavior as of 2.7.8
+    
+    Issue #2744 changed the behavior of diff printing so that diffs pass through
+    Puppet's reporting/logging system, which changes both the situations where it
+    is useful to print diffs, and the security considerations of printing diffs. This
+    commit updates the setting's description accordingly.
+    (cherry picked from commit 901a6b26c06dbfd8fa52be9c5a7f24bcaae4144a)
+
+commit 66c3662baec3b0ca69a58c4cd11484d5ed209dad
+Merge: eae2c9d 901a6b2
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Thu Dec 8 11:42:09 2011 -0800
+
+    Merge remote-tracking branch 'nfagerlund/ticket/2.7.x/11291_show_diffs_description' into 2.7.x
+    
+    * nfagerlund/ticket/2.7.x/11291_show_diffs_description:
+      (#11291) Update description of show_diff setting to match behavior as of 2.7.8
+
+commit 901a6b26c06dbfd8fa52be9c5a7f24bcaae4144a
+Author: nfagerlund <nick.fagerlund@gmail.com>
+Date:   Thu Dec 8 11:28:38 2011 -0800
+
+    (#11291) Update description of show_diff setting to match behavior as of 2.7.8
+    
+    Issue #2744 changed the behavior of diff printing so that diffs pass through
+    Puppet's reporting/logging system, which changes both the situations where it
+    is useful to print diffs, and the security considerations of printing diffs. This
+    commit updates the setting's description accordingly.
+
+commit 10c1c16f1d76fe044ca2d14aa900233c57364547
+Merge: 94bdc38 803e92f
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Thu Dec 8 11:28:04 2011 -0800
+
+    Merge remote-tracking branch 'nicklewis/fix-read_body-called-twice'
+    
+    * nicklewis/fix-read_body-called-twice:
+      Don't try to read the body of a file content response twice
+
+commit 803e92f38aa9317ac1dd617a892da5449c2d8638
+Author: <span class="color00FF00">Nick Lewis</span> <nick@puppetlabs.com>
+Date:   Wed Dec 7 12:08:48 2011 -0800
+
+    Don't try to read the body of a file content response twice
+    
+    Previously, get_file_from_source was calling Net::HTTP#request_get to
+    request file content, and yielding the response to
+    chunk_file_from_source, which would read the body. However, when called
+    without a block, request_get will read the body itself before returning
+    the response. This caused an error when chunk_file_from_source then
+    tried to read (and inflate if necessary) the body.
+    
+    Now, get_file_from_source will pass its block along to request_get,
+    which will yield the unread response, rather than yielding the result of
+    request_get, which is a read response. This prevents a double read
+    error, and also allows us to properly inflate the body.
+
+commit 84fdf6f0f9f46b12bfca5f75f0e4bb47e91c9899
+Author: Max Martin <max@puppetlabs.com>
+Date:   Thu Dec 8 11:11:02 2011 -0800
+
+    (#10109) Make resourcefile work with composite namevars
+    
+    The code for creating the resourcefile was directly calling
+    resource.name_var, which was causing problems with resources that have
+    composite namevars (since, for these, Type#name_var will return false).
+    This patch sanitizes the process by first checking whether there is a
+    single namevar, and simply calling resource.ref if there is not one.
+    
+    Reviewed-by: Matt Robinson
+
+commit eae2c9df6f956f36ee3419997c12710e20b440ff
+Merge: 7d38216 05b3cac
+Author: Carl Caum <carl@carlcaum.com>
+Date:   Thu Dec 8 11:02:36 2011 -0800
+
+    Merge pull request #231 from kelseyhightower/ticket/2.7.x/10940_deprecate_apply_for_catalog
+    
+    Ticket/2.7.x/10940 deprecate apply for catalog
+    
+    Reviewed by Carl Caum <carl@puppetlabs.com>
+
+commit 7d38216238203d2cf7273af228a0b86b872c69da
+Merge: 5da4875 15f7a1c
+Author: <span class="color0000FF">Daniel Pittman</span> <daniel@rimspace.net>
+Date:   Thu Dec 8 10:48:14 2011 -0800
+
+    Merge pull request #250 from jeffmccune/ticket/2.7.x/11246_fix_utf8_string_to_yaml_bug
+    
+    (#11246) Fix UTF-8 String#to_yaml bug
+
+commit 5da4875a50cf29079ea8c3c8bcb3ce50ad7f02f2
+Merge: 64a3e14 3ab4d63
+Author: Josh Cooper <josh@puppetlabs.com>
+Date:   Thu Dec 8 10:42:28 2011 -0800
+
+    Merge remote-tracking branch 'masterzen/tickets/2.7.x/10066' into 2.7.x
+    
+    * masterzen/tickets/2.7.x/10066:
+      Fix #10066 - when fingerprinting, agent should not daemonize
+
+commit 64a3e145b3dfb6992e159a9729dfd2d05f9fdcdf
+Merge: 5585afc 599a146
+Author: Kelsey Hightower <kelsey.hightower@puppetlabs.com>
+Date:   Thu Dec 8 10:34:59 2011 -0800
+
+    Merge pull request #256 from ody/ticket/2.7.x/11273_init.pp_template_for_module_face_should_be_more_thorough
+    
+    Ticket/2.7.x/11273 init.pp template for module face should be more thorough
+
+commit 15f7a1c7ed5bbf635633c3ff0588550ab852716b
+Author: Jeff McCune <jeff@puppetlabs.com>
+Date:   Wed Dec 7 19:21:24 2011 -0800
+
+    (#11246) Add README_DEVELOPER describing UTF-8 in Puppet
+    
+    Without this patch, developers of Puppet don't have a clear place to get
+    a high level understanding of the way other Puppet developers are
+    working with UTF-8 and the differences in character encodings between
+    Ruby 1.8 and 1.9.
+    
+    This patch addresses this problem by adding a new document,
+    README_DEVELOPER.md where developers and contributors can look to for
+    high level information.
+
+commit 5585afc591c10058dd0baa8cbb2f4a7564c945d9
+Merge: 0f56154 1e8e34b
+Author: Josh Cooper <josh@puppetlabs.com>
+Date:   Wed Dec 7 17:20:38 2011 -0800
+
+    Merge remote-tracking branch 'matt/ticket/2.7.x/11276_module_tool_tar_on_windows' into 2.7.x
+    
+    * matt/ticket/2.7.x/11276_module_tool_tar_on_windows:
+      (#11276) Fix module install specs that fail on windows
+      (#11276) Mark module tool tests as failing on Windows
+
+commit 1e8e34bfba3a8344da87932a6ac4936010c26ff9
+Author: Matt Robinson <matt@puppetlabs.com>
+Date:   Wed Dec 7 16:40:45 2011 -0800
+
+    (#11276) Fix module install specs that fail on windows
+    
+    expand_path is our friend for cross platform testing.  Also, need to
+    require module_tool in order to run the install_spec.rb on its own.
+
+commit 0f56154d3cdcb49106dd1a17687dd69492f02be4
+Merge: 999355f c78d17e
+Author: Jeff McCune <jeff@puppetlabs.com>
+Date:   Wed Dec 7 17:09:20 2011 -0800
+
+    Merge pull request #258 from lifton/ticket/2.7.x/7110_better_ssl_error
+    
+    Ticket/2.7.x/7110 better ssl error
+
+commit c78d17e365d21fa443ada615844dbc8e5fad425e
+Author: Joshua Harlan Lifton <lifton@puppetlabs.com>
+Date:   Wed Dec 7 11:13:42 2011 -0800
+
+    (#7110) Better SSL error message certificate doesn't match key
+    
+    Previously, any error with the certificate retrieved from the master
+    matching the agent's private key would give the same static error
+    message, which wasn't particularly helpful. This commit differentiates
+    three different error cases: missing certificate, missing private key,
+    and certificate doesn't match private key. In the last case, the error
+    message includes the fingerprint of the certificate in question and
+    explicit command line instructions on how to fix the problem.
+    
+    In addition to all tests passing, I tested the error messaging and
+    included instructions in a virtual machine setup running PE 2.0.0.
+
+commit 00c76f6d36ccffb17bbbf3da056cbe01bf2f8211
+Author: Matt Robinson <matt@puppetlabs.com>
+Date:   Wed Dec 7 16:23:47 2011 -0800
+
+    (#11276) Mark module tool tests as failing on Windows
+    
+    Until we can deal with the module tool's reliance on tar, either by
+    recommending a tar installation for windows or not needing to, the
+    module tool won't work on windows and I'm marking the specs accordingly.
+    `puppet module search` currently works on windows, but it's one of the
+    few actions that doesn't deal with tar files.
+
+commit 94bdc38086e757f53573a88ce9ebec5d667ed9a4
+Merge: 051cb74 b466c18
+Author: Jeff McCune <jeff@puppetlabs.com>
+Date:   Wed Dec 7 16:22:00 2011 -0800
+
+    Merge pull request #249 from lifton/master
+    
+    (#7110) Better SSL error message when certificate doesn't match key
+
+commit b466c1801844606031580d06ea2a98bf7b8667c6
+Author: Joshua Harlan Lifton <lifton@puppetlabs.com>
+Date:   Wed Dec 7 11:13:42 2011 -0800
+
+    (#7110) Better SSL error message certificate doesn't match key
+    
+    Previously, any error with the certificate retrieved from the master
+    matching the agent's private key would give the same static error
+    message, which wasn't particularly helpful. This commit differentiates
+    three different error cases: missing certificate, missing private key,
+    and certificate doesn't match private key. In the last case, the error
+    message includes the fingerprint of the certificate in question and
+    explicit command line instructions on how to fix the problem.
+    
+    In addition to all tests passing, I tested the error messaging and
+    included instructions in a virtual machine setup running PE 2.0.0.
+
+commit 051cb74fc71fef086cf345fefe1718fbeeb79f55
+Merge: 3406081 5d426ac
+Author: <span class="colorFF0000">Jacob Helwig</span> <jacob@puppetlabs.com>
+Date:   Wed Dec 7 15:43:53 2011 -0800
+
+    Merge branch 'tickets/master/10032-fix-acceptance-path-issues-on-solaris'
+    
+    * tickets/master/10032-fix-acceptance-path-issues-on-solaris:
+      (#10032) Update test to run on solaris
+
+commit 5d426ac95da9be311c8ac1b84e2ac9c7044cb71f
+Author: Dominic Maraglia <dominic@puppetlabs.com>
+Date:   Wed Oct 12 11:17:45 2011 -0700
+
+    (#10032) Update test to run on solaris
+    
+    Update test to use the new "puppet" method vs. calling
+    puppet via "on"; using "puppet" results in correct setting
+    of RUBYLIB and PATH.
+
+commit 599a146386965f56b015530da59f3dd7cfc12415
+Author: Cody Herriges <cody@puppetlabs.com>
+Date:   Wed Dec 7 15:16:59 2011 -0800
+
+    (#11273) Updates init.pp.erb for style guide.
+    
+      This patch introduces a more thorough init.pp template that outlines
+      what parameters and variables are, a spot for Author, and Copyright;
+      to be used when a new module skeleton is generated using the puppet
+      module face.  Content is based on recommended puppet doc format, suggested by
+      the official style guide.  Plus a few fix ups in syntax.  In testing this
+      template I found errors in our style guide and will be pushing a branch to fix
+      that recommendation too.
+
+commit 999355facb493509e3648845286d6fefe6f598fd
+Merge: cb753cd cd2d2f1
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Wed Dec 7 15:05:31 2011 -0800
+
+    Merge remote-tracking branch 'daniel-pittman/bug/2.6.x/9158-support-multiple-versions-of-stomp-gem' into 2.7.x
+    
+    * daniel-pittman/bug/2.6.x/9158-support-multiple-versions-of-stomp-gem:
+      (#9158) Support old and new versions of STOMP gem.
+
+commit cb753cdc562b078c2339ca00232038a66581c167
+Merge: f7f4ac2 80e5d03
+Author: James Turnbull <james@lovedthanlost.net>
+Date:   Wed Dec 7 14:47:05 2011 -0800
+
+    Merge pull request #254 from kelseyhightower/ticket/2.7.x/11198_generated_module_templates_should_have_a_default_license
+    
+    Ticket/2.7.x/11198 generated module templates should have a default license
+
+commit 80e5d03fd24f085a9cef6ff8838787c17f139aec
+Author: Kelsey Hightower <kelsey@puppetlabs.com>
+Date:   Wed Dec 7 17:26:21 2011 -0500
+
+    (#11198) Modulefiles should have a default license
+    
+    Before this patch, the module generate action generates Modulefiles
+    with the license set to UNKNOWN, which is not a valid license.
+    
+    This patch fixes this issue by setting the default value of the
+    `Puppet::Module::Tool::Metadata#license` attribute to 'Apache License,
+    Version 2.0' by default. This patch also adds a new unit test verifying
+    this this change.
+
+commit eec749523cf0de97b426cf84e63e78fd8f2f634a
+Author: Jeff McCune <jeff@puppetlabs.com>
+Date:   Tue Dec 6 22:05:00 2011 -0800
+
+    (#11246) Fix UTF-8 String#to_yaml exception
+    
+    Without this patch, String instances with an encoding of UTF-8 cannot be
+    serialized to YAML.  The method that coverts non-ascii 8bit printable
+    bytes to escape sequences uses regular expressions to match specific
+    bytes in the string.  This works fine in Ruby 1.8, but Ruby 1.8 adds
+    encodings to Regexp and String instances.  This is a problem because
+    regular expressions of one encoding may not work with Strings of another
+    encoding.
+    
+    This patch fixes the problem by ensuring Regexp's clearly assuming a
+    byte sequence rather than a character sequence used in the YAML
+    serialization process are given an ASCII-8BIT encoded string.
+    
+    A new helper method String#to_ascii8bit is added by this patch to make
+    Ruby 1.8 support easier.  None of this matters with Ruby 1.8 so the
+    helper method simply returns the string itself.  If the String does have
+    an encoding, but it's already ASCII-8BIT the helper also returns the
+    string itself.
+    
+    In the case the String has an encoding and it's not a byte sequence with
+    ASCII-8BIT encoding, we make a duplicate of the string so we can force
+    the encoding.  The duplicate is necessary so we don't change the
+    encoding of the original string.  For extremely large strings this may
+    be an issue and other strategies may be necessary.
+
+commit f7f4ac206bfc231700ded1c4d528da755b32225b
+Merge: 379fdaf b2cfe28
+Author: Matt Robinson <matt@puppetlabs.com>
+Date:   Wed Dec 7 11:32:38 2011 -0800
+
+    Merge pull request #244 from kelseyhightower/ticket/2.7.x/7656_module_tool_should_be_a_face
+    
+    Ticket/2.7.x/7656 module tool should be a face
+
+commit 3406081b3d91bb796f8fa666d22a05054fda42f4
+Merge: 814323e ca5749c
+Author: Patrick Carlisle <patrick@puppetlabs.com>
+Date:   Wed Dec 7 11:19:18 2011 -0800
+
+    Merge branch 'tickets/master/10064'
+    
+    * tickets/master/10064:
+      (#10064) Add the Puppet environment to reports
+
+commit ca5749c6d47073d53e9e27a5242e2a6e07b70db2
+Author: James Turnbull <james@lovedthanlost.net>
+Date:   Fri Oct 14 12:08:34 2011 +1100
+
+    (#10064) Add the Puppet environment to reports
+    
+    Previously the Puppet environment was not included in
+    the report output. Using the model of how configuration_version
+    was added to the reports the environment will now also be reported.
+    
+    Puppet::Transaction::Report now takes three arguments:
+    
+    * Kind of report
+    * Configuration version
+    * Environment
+    
+    Tests for this have been added and existing tests updated.
+</pre>
